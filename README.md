@@ -75,7 +75,7 @@ App available at: https://mlab.com/databases/sl_task_manager
 
 ### 4 Workflow
 
-**Create new database on mLab**
+**Create new database on mlab.com**
 
 - db name: sl_task_manager
 - collections: categories, tasks
@@ -152,4 +152,62 @@ App available at: https://mlab.com/databases/sl_task_manager
 
 Connect the database and flask application by using a database URL. To help Flask talk to Mongo, install a library called flask-pymongo.
 
+- Create a user for the database on mlab.com
 
+- Install flask-pymongo
+
+    ```bash
+    pip3 install flask-pymongo
+    ```
+
+- Create environment variable to store MongoDB URI (locally for development and on heroku.com)
+
+    ```bash
+    export MONGO_URI=mongodb://<dbuser>:<dbpassword>@ds247121.mlab.com:47121/sl_task_manager
+    ```
+
+- Connect to the database from app.py and create a get_tasks view
+
+    ```python
+    import os
+    from flask import Flask , render_template, redirect, request, url_for
+    from flask_pymongo import PyMongo
+
+    app = Flask(__name__)
+
+    app.config["MONGO_DBNAME"] = 'sl_task_manager'
+    app.config["MONGO_URI"] = os.getenv('MONGO_URI')
+
+    mongo = PyMongo(app)
+
+    @app.route('/')
+    @app.route('/get_tasks')
+    def get_tasks():
+        """
+        Display the tasks colection on tasks.html
+        """
+        return render_template("tasks.html", tasks=mongo.db.tasks.find())
+    ```
+
+- Create a templates directory with tasks.html using Jinja to loop through the collection
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Task Manager</title>
+    </head>
+    <body>
+        {% for task in tasks %}
+        {{task.task_name}}
+        {{task.category_name}}
+        {{task.task_description}}
+        {{task.due_date}}
+        {{task.is_urgent}}
+        {% endfor %}
+    </body>
+    </html>
+    ```
