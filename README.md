@@ -239,3 +239,25 @@ Connect the database and flask application by using a database URL. To help Flas
     ```
 
 - Create addtask.html with a form to post new task data
+
+- Add functionality to submit form data:
+
+    - In addtask.html
+    ```html
+    <form action="{{url_for('insert_task')}}" method="POST" class="col s12">
+        <!-- form inputs -->
+        ...
+        <button type="submit">Add Task</button>
+    </form>
+    ```
+
+    - In app.py
+    ```python
+    @app.route('/insert_task', methods=['POST'])
+    def insert_task():
+        tasks = mongo.db.tasks
+        tasks.insert_one(request.form.to_dict())
+        return redirect(url_for('get_tasks'))
+    ```
+
+
