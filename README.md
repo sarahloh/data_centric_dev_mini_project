@@ -154,10 +154,11 @@ Connect the database and flask application by using a database URL. To help Flas
 
 - Create a user for the database on mlab.com
 
-- Install flask-pymongo
+- Install flask-pymongo and update requirements.txt
 
     ```bash
     pip3 install flask-pymongo
+    pip3 freeze > requirements.txt
     ```
 
 - Create environment variable to store MongoDB URI (locally for development and on heroku.com)
