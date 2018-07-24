@@ -65,7 +65,9 @@ App available at: https://mlab.com/databases/sl_task_manager
 - [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3)
 - [Materialize](https://materializecss.com)
 - [Python3](https://www.python.org)
+- [pip3](https://pip.pypa.io/en/stable/)
 - [Flask](http://flask.pocoo.org)
+- [flask-pymongo](http://flask-pymongo.readthedocs.io/en/latest/)
 - [MongoDB](https://www.mongodb.com)
 - [mLab](https://mlab.com)
 - [Heroku](http://heroku.com)
@@ -142,3 +144,12 @@ App available at: https://mlab.com/databases/sl_task_manager
     ```
 
 - Set environment variables on heroku.com
+
+- App running on https://sl-task-manager.herokuapp.com/
+
+
+**Connect Flask to MongoDB**
+
+Connect the database and flask application by using a database URL. To help Flask talk to Mongo, install a library called flask-pymongo.
+
+
