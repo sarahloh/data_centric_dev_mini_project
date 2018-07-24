@@ -194,11 +194,7 @@ Connect the database and flask application by using a database URL. To help Flas
 
     ```html
     <!DOCTYPE html>
-    <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Task Manager</title>
     </head>
     <body>
@@ -212,3 +208,34 @@ Connect the database and flask application by using a database URL. To help Flas
     </body>
     </html>
     ```
+
+**Adding a Task - Accepting User Input**
+
+- Setup template inheritance by creating base.html and using extends in other html pages
+
+- Import materialize css and icons in the ```<head>``` tag in base.html
+
+    ```html
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    ```
+
+- Add the block content placeholders and import materialize javascript and jQuery before the closing ```</body>``` tag in base.html
+
+    ```html
+    <body>
+
+        {% block content %}
+        {% endblock %}
+
+        <!-- jQuery -->
+        <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js></script>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+
+    </body>
+    ```
+
+- Create addtask.html with a form to post new task data

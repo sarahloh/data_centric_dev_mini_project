@@ -25,7 +25,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
     <script>
         $(document).ready(function () {
-                $('.collapsible').collapsible();
+            $('.collapsible').collapsible();
+            $('.datepicker').datepicker({
+                format: 'dd mmmm, yyyy',
+                autoClose: false
+            });
         });
     </script>
 </body>
