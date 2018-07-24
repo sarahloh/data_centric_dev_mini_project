@@ -3,6 +3,8 @@ Python, MongoDb, mLab, Flask, Materialize
 
 *Developer: sarahloh*
 
+App available at: https://mlab.com/databases/sl_task_manager
+
 [1. Project Brief](#1-project-brief)
 
 [2. Learning Outcomes](#2-learning-outcomes)
@@ -11,9 +13,6 @@ Python, MongoDb, mLab, Flask, Materialize
 
 [4. Workflow](#4-workflow)
 
-[5. Deployment](#5-deployment)
-
-[6. Testing](#6-testing)
 
 ### 1 Project Brief
 *Create a Task Manager application*
@@ -69,6 +68,7 @@ Python, MongoDb, mLab, Flask, Materialize
 - [Flask](http://flask.pocoo.org)
 - [MongoDB](https://www.mongodb.com)
 - [mLab](https://mlab.com)
+- [Heroku](http://heroku.com)
 
 
 ### 4 Workflow
@@ -121,8 +121,24 @@ Python, MongoDb, mLab, Flask, Materialize
                 debug=True)
     ```
 
+**Deploy to Heroku**
 
-### 5 Deployment
+- Create new app on heroku.com (app name: sl-task-manager)
 
+- Use git and Heroku CLI to setup and push to heroku remote
 
-### 6 Testing
+    ```bash
+    heroku login
+    heroku apps
+    heroku git:remote -a sl-task-manager
+    pip3 freeze > requirements.txt
+    echo web: python app.py > Procfile
+    # push to heroku
+    git add .
+    git commit -m 'Add requirements.txt and Procfile'
+    git push heroku master
+    # start the app
+    heroku ps:scale web=1
+    ```
+
+- Set environment variables on heroku.com
