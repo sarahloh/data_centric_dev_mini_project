@@ -279,4 +279,24 @@ Connect the database and flask application by using a database URL. To help Flas
     </head>
     ```
 
+- Create edit and done buttons on for each task on tasks.html
+
+- Create edit_task route and template and connect edit button to function in app.py
+
+    - In app.py
+
+        ```python
+        @app.route('/edit_task/<task_id>')
+        def edit_task(task_id):
+            the_task = mongo.db.tasks.find_one({"_id": ObjectId(task_id)})
+            all_categories = mongo.db.categories.find()
+            return render_template('edittask.html', task=the_task, categories=all_categories)
+        ```
+
+    - In tasks.html
+
+        ```html
+        <a href="{{url_for('edit_task', task_id=task._id)}}" class="waves-effect waves-light btn btn-small blue">Edit</a>
+        ```
+
 
