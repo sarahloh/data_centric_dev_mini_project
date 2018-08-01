@@ -3,7 +3,7 @@
 <h3>Edit Task</h3>
 
 <div class="row">
-    <form action="{{url_for('insert_task')}}" method="POST" class="col s12">
+    <form action="{{url_for('update_task', task_id=task._id)}}" method="POST" class="col s12">
         <div class="row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">poll</i>
@@ -67,7 +67,7 @@
         var date_str = '{{task.due_date}}';
         var day = parseInt(date_str.slice(0,2));
         var month = parseInt(date_str.slice(3,5)) -1;
-        var year = parseInt(date_str.slice(7));
+        var year = parseInt(date_str.slice(6));
 
         var due_date = new Date();
         due_date.setFullYear(year, month, day);

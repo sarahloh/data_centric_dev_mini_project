@@ -298,5 +298,28 @@ Connect the database and flask application by using a database URL. To help Flas
         ```html
         <a href="{{url_for('edit_task', task_id=task._id)}}" class="waves-effect waves-light btn btn-small blue">Edit</a>
         ```
+- Bind data to edit task form
 
+- Update task in the database on submit edit task form
 
+    - In app.py
+
+        ```python
+        @app.route('/update_task/<task_id>', methods=['POST'])
+        def update_task(task_id):
+            tasks = mongo.db.tasks
+            tasks.update( { '_id': ObjectId(task_id) },
+            {
+                'task_name': request.form.get('task_name'),
+                'category_name': request.form.get('category_name'),
+                'task_description': request.form.get('task_description'),
+                'due_date': request.form.get('due_date'),
+                'is_urgent': request.form.get('is_urgent')
+            })
+            return redirect(url_for('get_tasks'))
+        ```
+    - In edittask.html
+
+        ```html
+        <form action="{{url_for('update_task', task_id=task._id)}}" method="POST" class="col s12">
+        ```
