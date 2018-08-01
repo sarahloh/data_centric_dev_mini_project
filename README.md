@@ -209,7 +209,7 @@ Connect the database and flask application by using a database URL. To help Flas
     </html>
     ```
 
-**Adding a Task - Accepting User Input**
+**Adding a Task**
 
 - Setup template inheritance by creating base.html and using extends in other html pages
 
@@ -258,6 +258,25 @@ Connect the database and flask application by using a database URL. To help Flas
         tasks = mongo.db.tasks
         tasks.insert_one(request.form.to_dict())
         return redirect(url_for('get_tasks'))
+    ```
+
+**Editing a Task**
+
+- Add static directory and style.css
+
+    ```bash
+    mkdir static
+    mkdir static/css
+    touch static/css/style.css
+    ```
+
+    - In base.html
+
+    ```html
+    <head>
+        ...
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    </head>
     ```
 
 
