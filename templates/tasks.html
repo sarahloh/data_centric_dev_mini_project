@@ -1,18 +1,24 @@
 {% extends 'base.html' %} {% block content %}
 
 <ul class="collapsible">
-{% for task in tasks %}
+    {% for task in tasks %}
     <li>
         <div class="collapsible-header">
-            <i class="material-icons">expand_more</i>
-            <strong>{{task.task_name}}</strong> -
-            {{task.due_date}}
+            <div class="col s3">
+                <i class="material-icons">expand_more</i>
+                <a class="waves-effect waves-light btn btn-small">Done</a>
+                <a class="waves-effect waves-light btn btn-small blue">Edit</a>
+
+            </div>
+            <div class="task-header col s9">
+                <strong>{{task.task_name}}</strong> - {{task.due_date}}
+            </div>
         </div>
         <div class="collapsible-body">
             <span>{{task.task_description}}</span>
         </div>
     </li>
-{% endfor %}
+    {% endfor %}
 </ul>
 
 {% endblock %}
