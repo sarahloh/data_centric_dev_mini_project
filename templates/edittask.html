@@ -2,55 +2,84 @@
 
 <h3>Edit Task</h3>
 
-<form action="{{url_for('insert_task')}}" method="POST" class="col s12">
-    <div class="row">
-        <div class="input-field col s12">
-            <i class="material-icons prefix">poll</i>
-            <select id="category" name="category_name">
-                <option value="" disabled selected>Choose your option</option>
-                {% for cat in categories %}
-                <option value="{{cat.category_name}}">{{cat.category_name}}</option>
-                {% endfor %}
+<div class="row">
+    <form action="{{url_for('insert_task')}}" method="POST" class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">poll</i>
+                <select id="category" name="category_name">
+                    <option value="" disabled selected>Choose your option</option>
+                    {% for cat in categories %} {% if cat.category_name == task.category_name %}
+                    <option value="{{cat.category_name}}" selected>{{cat.category_name}}</option>
+                    {% else %}
+                    <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+                    {% endif %} {% endfor %}
 
-            </select>
-            <label>Task Category</label>
+                </select>
+                <label>Task Category</label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="input-field col s12">
-            <i class="material-icons prefix">assignment</i>
-            <input id="task_name" name="task_name" type="text" class="validate">
-            <label for="task_name">Task Name</label>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">assignment</i>
+                <input id="task_name" name="task_name" type="text" class="validate" value="{{task.task_name}}">
+                <label for="task_name">Task Name</label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="input-field col s12">
-            <i class="material-icons prefix">subject</i>
-            <textarea id="task_description" name="task_description" class="materialize-textarea"></textarea>
-            <label for="task_description">Task Description</label>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">subject</i>
+                <textarea id="task_description" name="task_description" class="materialize-textarea">{{task.task_description}}</textarea>
+                <label for="task_description">Task Description</label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="input-field col s12">
-            <i class="material-icons prefix">calendar_today</i>
-            <input id="due_date" name="due_date" type="text" class="datepicker">
-            <label for="due_date">Due Date</label>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">calendar_today</i>
+                <input id="due_date" name="due_date" type="text" class="datepicker">
+                <label for="due_date">Due Date</label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="switch">
-            <label>
-                <input id="is_urgent" name="is_urgent" type="checkbox">
-                <span class="lever"></span>
-                Is Urgent
-            </label>
+        <div class="row">
+            <div class="switch">
+                <label>
+                    {% if task.is_urgent %}
+                    <input id="is_urgent" name="is_urgent" type="checkbox" checked> {% else %}
+                    <input id="is_urgent" name="is_urgent" type="checkbox"> {% endif %}
+                    <span class="lever"></span>
+                    Is Urgent
+                </label>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <button class="btn waves-effect waves-light" type="submit">Update Task
-            <i class="material-icons right">send</i>
-        </button>
-    </div>
-</form>
+        <div class="row">
+            <button class="btn waves-effect waves-light" type="submit">Update Task
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </form>
+</div>
+
+<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        var date_str = '{{task.due_date}}';
+        var day = parseInt(date_str.slice(0,2));
+        var month = parseInt(date_str.slice(3,5)) -1;
+        var year = parseInt(date_str.slice(7));
+
+        var due_date = new Date();
+        due_date.setFullYear(year, month, day);
+
+        $('.datepicker').datepicker({
+            defaultDate: due_date,
+            setDefaultDate: true,
+            format: 'dd/mm/yyyy'
+        }).trigger('change');
+
+
+    });
+</script>
 
 {% endblock %}
