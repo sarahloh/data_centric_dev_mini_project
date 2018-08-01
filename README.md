@@ -338,3 +338,6 @@ Connect the database and flask application by using a database URL. To help Flas
     ```html
     <a href="{{url_for('delete_task', task_id=task._id)}}" class="waves-effect waves-light btn btn-small">Done</a>
     ```
+
+**Add the same CRUD functionality for Categories**
+
