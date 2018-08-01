@@ -323,3 +323,18 @@ Connect the database and flask application by using a database URL. To help Flas
         ```html
         <form action="{{url_for('update_task', task_id=task._id)}}" method="POST" class="col s12">
         ```
+
+**Deleting a Task**
+
+- Connect the done button to the delete_task function
+
+    ```python
+    @app.route('/delete_task/<task_id>')
+    def delete_task(task_id):
+        mongo.db.tasks.remove({ '_id': ObjectId(task_id) })
+        return redirect(url_for('get_tasks'))
+    ```
+
+    ```html
+    <a href="{{url_for('delete_task', task_id=task._id)}}" class="waves-effect waves-light btn btn-small">Done</a>
+    ```
