@@ -3,7 +3,7 @@ Python, MongoDb, mLab, Flask, Materialize
 
 *Developer: sarahloh*
 
-App available at: https://mlab.com/databases/sl_task_manager
+App available at: https://sl-task-manager.herokuapp.com/
 
 [1. Project Brief](#1-project-brief)
 
